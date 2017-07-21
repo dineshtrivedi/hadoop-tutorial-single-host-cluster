@@ -129,5 +129,6 @@ cat /root/.ssh/id_rsa
 ## References
 * [SELinux](https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-1-basic-concepts)
 * [Guest machine Virtualbox](https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745)
-* [Learning Journal Tutorial](https://www.youtube.com/watch?v=DJPwV2ge9m0&list=PLkz1SCf5iB4dw3jbRo0SYCk2urRESUA3v&index=6)
+* [Learning Journal Tutorial Youtube](https://www.youtube.com/watch?v=DJPwV2ge9m0&list=PLkz1SCf5iB4dw3jbRo0SYCk2urRESUA3v&index=6)
 * [Huge Pages and Transparent Huge Pages](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-transhuge.html)
+* [Learning Journal HadoopTutorials Repository](https://github.com/LearningJournal/HadoopTutorials)
