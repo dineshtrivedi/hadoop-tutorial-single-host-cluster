@@ -23,9 +23,11 @@ sudo chmod 600 /root/.ssh/authorized_keys
 #sudo ulimit -n 10000
 sudo service ntpd start
 sudo chkconfig ntpd on
-sudo servive iptables stop
+sudo /etc/init.d/iptables stop
+sudo /etc/init.d/iptables status
 sudo chkconfig iptables off
 sudo service ip6tables stop
+sudo service ip6tables status
 sudo chkconfig ip6tables off
 sudo setenforce 0
 sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
