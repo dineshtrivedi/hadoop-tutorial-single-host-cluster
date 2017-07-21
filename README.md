@@ -5,9 +5,11 @@
 You can download [here](https://www.virtualbox.org/wiki/Downloads) or follow the command for the following OS:
 
 ### Ubuntu 16.04
-* sudo apt-get install -y virtualbox
-* sudo apt-get update && sudo apt-get install virtualbox-dkms virtualbox-qt linux-headers-$(uname -r) -y
-* modprobe vboxdrv (It can fail) 
+```
+sudo apt-get install -y virtualbox
+sudo apt-get update && sudo apt-get install virtualbox-dkms virtualbox-qt linux-headers-$(uname -r) -y
+modprobe vboxdrv
+```
 
 If you get an error running the modprobe command similar to the message below check the [Boot Problems section](#boot-problems).
 ```
@@ -43,6 +45,13 @@ root 	ALL=(ALL)	ALL
 <your_username> 	ALL=(ALL)	ALL
 ```
 
+## Change to fixed IP
+Probably the eth1 is using DHCP. Go to Edit connection and change it to Manual. You can use values similar to:
+Adderss: 192.168.0.101
+Netmask: 255.255.255.0
+Gateway: 0.0.0.0
+
+
 ## Installing Guest Machine Additions
 Go to Devices menu and then "Insert Guest Addition CD Image...". Follow the steps download the ISO from the internet.
 Throught the console go to some path similar to below and install the additions:
@@ -67,12 +76,6 @@ Be sure that the Secure Boot is disabled and you are using the Legacy Boot. Chec
 You can disable Secure Boot (UEFI) in the BIOS with the following steps:
 1. Reboot your machine and enter the BIOS Menu (In my case pressing F2)
 2. Search for Secure Boot and change to Legacy
-
-In an ASUS motherboard:
-1. Go to the Advanced Mode (F7)
-2. Go in the Secure Boot option under the Boot section
-3. Change "Windows UEFI mode" with "Other OS"
-4. Save and restart to apply settings (F10)
 ```
 
 Here is a [link](https://askubuntu.com/questions/762254/why-do-i-get-required-key-not-available-when-install-3rd-party-kernel-modules) with more information.
@@ -80,9 +83,80 @@ Here is a [link](https://askubuntu.com/questions/762254/why-do-i-get-required-ke
 ## Hadoop Distribution
 This tutorial uses [Hortnworks](https://hortonworks.com/) distribution. This tutorial uses [Ambari documentation](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.0/bk_installing-hdf/content/ch_install-ambari.html).
 
-### Ambari Instalation
+### Preparing environment
+The following steps are preparing the CentOS to install Hadoop.
+
+#### SSH Keys
+Create the key without any additional information (just press enter for all quetions)
+```
+ssh-keygen
+```
+
+Copy the SSH Public Key (id_rsa.pub) to the root account on your target hosts.
+```
+sudo cp ~/.ssh/id_rsa /root/.ssh
+sudo cp ~/.ssh/id_rsa.pub /root/.ssh
+```
+
+Add the SSH Public Key to the authorized_keys file on your target hosts.
+```
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+Depending on your version of SSH, you may need to set permissions on the .ssh directory (to 700) and the authorized_keys file in that directory (to 600) on the target hosts.
+```
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+Start and set the ssd deamon to start on computer start:
+```
+sudo /etc/init.d/sshd start
+sudo chkconfig sshd on
+sudo /etc/init.d/sshd status
+```
+
+The last output should be something like:
+```
+openssh-daemon (pid  3495) is running...
+```
+
+From the Ambari Server, make sure you can connect to each host in the cluster using SSH, without having to enter a password. In our case is the same machine so get your hostname running:
+```
+hostname -f
+```
+
+Get the host name and run the command:
+```
+ssh root@<hostname>
+```
+
+If the following warning message displays during your first connection: Are you sure you want to continue connecting (yes/no)? Enter Yes
+
+### Ambari Server Instalation
 According to the documentation the instalation run the following commands:
-*
+```
+sudo wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.5.1.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
+yum repolist
+sudo yum -y install ambari-server
+sudo ambari-server setup
+```
+The following steps are to install hadoop:
+* Go to http://localhost:8080
+* The default user is admin and the password is also admin
+* Click Launch Install Wizard
+* Add your cluster name
+* Select the latest version for HDP
+* Use public repository (Requires internet access)
+* get you hostname running on the terminal:
+```
+hostname -f
+```
+* get your private ssh key running:
+```
+cat .ssh/id_rsa
+```
+
 
 ## References
 * SELinux - https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-1-basic-concepts
