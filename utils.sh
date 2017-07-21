@@ -31,7 +31,7 @@ function dorun {
     $cmd
     exitcode=$?
     t2=$(now_seconds)
-    delta_t=$(expr $t2 - $t1)
+    delta_t=$(($t2 - $t1))
     if [ $exitcode == 0 ]
     then
         echo_green "FINISHED $name in $delta_t s"

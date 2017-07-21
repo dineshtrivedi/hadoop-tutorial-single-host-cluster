@@ -1,5 +1,7 @@
 # Hadoop tutorial single host cluster
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/493f78ccea8f40c5a558622c5a8f0e4d)](https://www.codacy.com/app/dinesh-dart/hadoop-tutorial-single-host-cluster?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dineshtrivedi/hadoop-tutorial-single-host-cluster&amp;utm_campaign=Badge_Grade)
+
 ## Virtualbox 
 
 You can download [here](https://www.virtualbox.org/wiki/Downloads) or follow the command for the following OS:
@@ -81,7 +83,7 @@ You can disable Secure Boot (UEFI) in the BIOS with the following steps:
 Here is a [link](https://askubuntu.com/questions/762254/why-do-i-get-required-key-not-available-when-install-3rd-party-kernel-modules) with more information.
 
 ## Hadoop Distribution
-This tutorial uses [Hortnworks](https://hortonworks.com/) distribution. This tutorial uses [Ambari documentation](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.0/bk_installing-hdf/content/ch_install-ambari.html).
+This tutorial uses [Hortnworks](https://hortonworks.com/) distribution. This tutorial uses [Ambari documentation](https://docs.hortonworks.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-installation/content/ch_Getting_Ready.html).
 
 ### Preparing environment
 Run the prepare.sh script

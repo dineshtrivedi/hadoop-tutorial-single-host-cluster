@@ -5,7 +5,7 @@
 
 HOST_NAME=hdp.single.host.cluster.local
 SHORT_NAME=hdp
-read dummy IP_ADDRESS <<< $(hostname -I)
+read _ IP_ADDRESS <<< $(hostname -I)
 echo $IP_ADDRESS $HOST_NAME $SHORT_NAME | sudo tee -a /etc/hosts
 sudo sed -i "s/HOSTNAME=localhost.localdomain/HOSTNAME=$HOST_NAME/g" /etc/sysconfig/network
 sudo hostname $HOST_NAME
