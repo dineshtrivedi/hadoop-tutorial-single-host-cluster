@@ -84,44 +84,14 @@ Here is a [link](https://askubuntu.com/questions/762254/why-do-i-get-required-ke
 This tutorial uses [Hortnworks](https://hortonworks.com/) distribution. This tutorial uses [Ambari documentation](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.0/bk_installing-hdf/content/ch_install-ambari.html).
 
 ### Preparing environment
-The following steps are preparing the CentOS to install Hadoop.
-
-#### SSH Keys
-Create the key without any additional information (just press enter for all quetions)
+Run the prepare.sh script
 ```
-ssh-keygen
+./prepare.sh
 ```
 
-Copy the SSH Public Key (id_rsa.pub) to the root account on your target hosts.
-```
-sudo cp ~/.ssh/id_rsa /root/.ssh
-sudo cp ~/.ssh/id_rsa.pub /root/.ssh
-```
+The system will reboot after finishes it. The download can take a while.
 
-Add the SSH Public Key to the authorized_keys file on your target hosts.
-```
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-```
-
-Depending on your version of SSH, you may need to set permissions on the .ssh directory (to 700) and the authorized_keys file in that directory (to 600) on the target hosts.
-```
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-```
-
-Start and set the ssd deamon to start on computer start:
-```
-sudo /etc/init.d/sshd start
-sudo chkconfig sshd on
-sudo /etc/init.d/sshd status
-```
-
-The last output should be something like:
-```
-openssh-daemon (pid  3495) is running...
-```
-
-From the Ambari Server, make sure you can connect to each host in the cluster using SSH, without having to enter a password. In our case is the same machine so get your hostname running:
+After the reboot, from the Ambari Server, make sure you can connect to each host in the cluster using SSH, without having to enter a password. In our case is the same machine so get your hostname running:
 ```
 hostname -f
 ```
@@ -136,9 +106,8 @@ If the following warning message displays during your first connection: Are you 
 ### Ambari Server Instalation
 According to the documentation the instalation run the following commands:
 ```
-sudo wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.5.1.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
-yum repolist
-sudo yum -y install ambari-server
+sudo yum -y install ambari-server-2.5.1.0
+sudo yum install -y ntp
 sudo ambari-server setup
 ```
 The following steps are to install hadoop:
@@ -154,10 +123,10 @@ hostname -f
 ```
 * get your private ssh key running:
 ```
-cat .ssh/id_rsa
+cat /root/.ssh/id_rsa
 ```
-
 
 ## References
 * SELinux - https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-1-basic-concepts
 * Guest machine Virtualbox - https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745
+* Learning Journal Tutorial - https://www.youtube.com/watch?v=DJPwV2ge9m0&list=PLkz1SCf5iB4dw3jbRo0SYCk2urRESUA3v&index=6
