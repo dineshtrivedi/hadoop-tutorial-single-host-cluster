@@ -32,7 +32,7 @@ sudo service httpd start
 sudo chkconfig httpd on
 sudo service sshd start
 sudo chkconfig sshd on
-sudo cat thp.txt >> /etc/rc.local
+sudo cat transparent_hugepage.txt >> /etc/rc.local
 
 tar -zxvf ~/ambari/repo/ambari-2.5.1.0-centos6.tar.gz -C /var/www/html/
 tar -zxvf ~/ambari/repo/HDP-UTILS-1.1.0.21-centos6.tar.gz -C /var/www/html/
