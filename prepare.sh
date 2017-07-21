@@ -12,8 +12,9 @@ sudo hostname $HOST_NAME
 sudo service network restart
 
 ssh-keygen
-sudo cp ~/.ssh/id_rsa /root/.ssh
-sudo cp ~/.ssh/id_rsa.pub /root/.ssh
+sudo cp -f ~/.ssh/id_rsa /root/.ssh
+sudo cp -f ~/.ssh/id_rsa.pub /root/.ssh
+rm ~/.ssh/id_rsa*
 sudo cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 sudo chmod 700 /root/.ssh
 sudo chmod 600 /root/.ssh/authorized_keys
