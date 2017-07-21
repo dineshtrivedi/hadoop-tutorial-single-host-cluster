@@ -14,9 +14,9 @@ sudo service network restart
 ssh-keygen
 sudo cp ~/.ssh/id_rsa /root/.ssh
 sudo cp ~/.ssh/id_rsa.pub /root/.ssh
-cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
-chmod 700 /root/.ssh
-chmod 600 /root/.ssh/authorized_keys
+sudo cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+sudo chmod 700 /root/.ssh
+sudo chmod 600 /root/.ssh/authorized_keys
 
 sudo ulimit -n 10000
 sudo service ntpd start
