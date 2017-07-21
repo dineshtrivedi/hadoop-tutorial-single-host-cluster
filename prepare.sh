@@ -15,7 +15,8 @@ ssh-keygen
 sudo cp -f ~/.ssh/id_rsa /root/.ssh
 sudo cp -f ~/.ssh/id_rsa.pub /root/.ssh
 rm ~/.ssh/id_rsa*
-sudo cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+sudo touch /root/.ssh/authorized_keys
+cat /root/.ssh/id_rsa.pub | sudo tee -a /root/.ssh/authorized_keys
 sudo chmod 700 /root/.ssh
 sudo chmod 600 /root/.ssh/authorized_keys
 
